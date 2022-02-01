@@ -9,7 +9,7 @@ ImageStreamer::ImageStreamer(const async_web_server_cpp::HttpRequest &request,
                              async_web_server_cpp::HttpConnectionPtr connection, rclcpp::Node::SharedPtr nh) :
     request_(request), connection_(connection), nh_(nh), inactive_(false)
 {
-  topic_ = request.get_query_param_value_or_default("topic", "");
+  topic_ = request.get_query_param_value_or_default("topic", "/zed2i/zed_node/left_raw/image_raw_color");
 }
 
 ImageStreamer::~ImageStreamer()
