@@ -56,7 +56,7 @@ WebVideoServer::WebVideoServer(rclcpp::Node::SharedPtr &nh, rclcpp::Node::Shared
   if (private_nh->get_parameter("port", parameter)) {
     port_ = parameter.as_int();
   } else {
-    port_ = 5807;
+    port_ = 1180;
   }
   if (private_nh->get_parameter("verbose", parameter)) {
     __verbose = parameter.as_bool();
@@ -101,8 +101,7 @@ WebVideoServer::WebVideoServer(rclcpp::Node::SharedPtr &nh, rclcpp::Node::Shared
   stream_types_["h264"] = boost::shared_ptr<ImageStreamerType>(new H264StreamerType());
   stream_types_["vp9"] = boost::shared_ptr<ImageStreamerType>(new Vp9StreamerType());
 
-  handler_group_.addHandlerForPath("/nav", boost::bind(&WebVideoServer::handle_list_streams, this, _1, _2, _3, _4));
-  handler_group_.addHandlerForPath("/", boost::bind(&WebVideoServer::handle_stream, this, _1, _2, _3, _4));
+  handler_group_.addHandlerForPath("/", boost::bind(&WebVideoServer::handle_list_streams, this, _1, _2, _3, _4));
   handler_group_.addHandlerForPath("/stream", boost::bind(&WebVideoServer::handle_stream, this, _1, _2, _3, _4));
   handler_group_.addHandlerForPath("/stream_viewer",
                                    boost::bind(&WebVideoServer::handle_stream_viewer, this, _1, _2, _3, _4));
